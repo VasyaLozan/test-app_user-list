@@ -1,0 +1,38 @@
+<div class="container">
+  <header class="message-container">
+    <div>
+      <div class="message message-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+    </div>
+    <div>
+      <div class="message message-success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="content-left">
+      <div class="button-container">
+        <button (click)="createUserFrom()"
+          class="content_button content_button_blue content_button_blue-shadow">Create User</button>
+      </div>
+      <app-user-list (selectUserViewEmitter)="viewUserFrom($event)"
+                     [userList]="userList"></app-user-list>
+    </div>
+    <div class="content-right">
+      <app-user-view (closeEmitter)="closeUserFrom()"
+                     (saveEmitter)="saveUser($event)"
+                     (deleteEmitter)="deleteUser($event)"
+                     [mode]="userView"
+                     *ngIf="userView === 'create'"></app-user-view>
+      <app-user-view (closeEmitter)="closeUserFrom()"
+                     (saveEmitter)="saveUser($event)"
+                     (deleteEmitter)="deleteUser($event)"
+                     [mode]="userView"
+                     [userData]="selectedUser"
+                     *ngIf="userView === 'view'"></app-user-view>
+    </div>
+  </main>
+</div>

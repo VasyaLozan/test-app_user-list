@@ -1,0 +1,112 @@
+<div class="user-view">
+  <div class="user-view-header">
+    <span *ngIf="mode === 'create'">Create new user</span>
+    <span *ngIf="mode === 'view'">{{(userData?.firstName || '') + ' ' + (userData?.lastName || '')}}</span>
+    <img (click)="closeForm()"
+      class="user-view-close" ngSrc="../../../assets/svg/close-icon.svg" [priority]="false" alt="close-icon" height="24" width="24">
+  </div>
+  <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+    <div class="form-data">
+      <label for="user-name">
+        Username*
+      </label>
+      <input appFormValidation id="user-name" type="text" formControlName="userName" required>
+      <div class="form-data_error-message"
+           *ngIf="(userForm.controls.userName.touched || userForm.controls.userName.dirty) && userForm.controls.userName.invalid">
+        <div *ngIf="userForm.controls.userName.hasError('required')">Username is required!</div>
+      </div>
+    </div>
+    <div class="form-data">
+      <label for="first-name">
+        First Name*
+      </label>
+      <input appFormValidation id="first-name" type="text" formControlName="firstName" required>
+      <div class="form-data_error-message"
+           *ngIf="(userForm.controls.firstName.touched || userForm.controls.firstName.dirty) && userForm.controls.firstName.invalid">
+        <div *ngIf="userForm.controls.firstName.hasError('required')">First Name is required!</div>
+      </div>
+    </div>
+    <div class="form-data">
+      <label for="last-name">
+        Last Name*
+      </label>
+      <input appFormValidation id="last-name" type="text" formControlName="lastName" required>
+      <div class="form-data_error-message"
+           *ngIf="(userForm.controls.lastName.touched || userForm.controls.lastName.dirty) && userForm.controls.lastName.invalid">
+        <div *ngIf="userForm.controls.lastName.hasError('required')">Last Name is required!</div>
+      </div>
+    </div>
+    <div class="form-data form-data_relative">
+      <label for="email">
+        Email*
+      </label>
+      <input appFormValidation id="email" type="email" formControlName="email" required>
+      <div class="form-data_error-message"
+           *ngIf="(userForm.controls.email.touched || userForm.controls.email.dirty) && userForm.controls.email.invalid">
+        <div *ngIf="userForm.controls.email.hasError('required')">Email is required!</div>
+        <div *ngIf="userForm.controls.email.hasError('email')">Email is not valid!</div>
+      </div>
+      <img class="email-icon" ngSrc="assets/svg/email-icon.svg" alt="email-icon" width="24" height="24">
+    </div>
+    <div class="form-data form-data_relative">
+      <label for="type">
+        Type*
+      </label>
+      <select appFormValidation name="type" id="type" formControlName="type" required>
+        <option value="Administrator">Administrator</option>
+        <option value="Driver">Driver</option>
+      </select>
+      <div class="form-data_error-message"
+           *ngIf="(userForm.controls.type.touched || userForm.controls.type.dirty) && userForm.controls.type.invalid">
+        <div *ngIf="userForm.controls.type.hasError('required')">Type is required!</div>
+      </div>
+      <img class="select-icon" ngSrc="assets/svg/arrow-down.svg" alt="select-icon" width="24" height="24">
+    </div>
+    <div class="form-data">
+      <label for="password">
+        Password*
+      </label>
+      <input appFormValidation id="password" type="password" formControlName="password" required>
+      <div class="form-data_error-message"
+           *ngIf="(userForm.controls.password.touched || userForm.controls.password.dirty) && userForm.controls.password.invalid">
+        <div *ngIf="userForm.controls.password.hasError('required')">Password is required!</div>
+        <div *ngIf="userForm.controls.password.hasError('minLength') || userForm.controls.password.hasError('pattern')">
+          Min length 8. at least one number and one letter!
+        </div>
+      </div>
+    </div>
+    <div class="form-data">
+      <label for="repeat-password">
+        Repeat password*
+      </label>
+      <input appFormValidation id="repeat-password" type="password" formControlName="repeatPassword" required>
+      <div class="form-data_error-message"
+           *ngIf="(userForm.controls.repeatPassword.touched || userForm.controls.repeatPassword.dirty) && userForm.controls.repeatPassword.invalid">
+        <div *ngIf="userForm.controls.repeatPassword.hasError('required')">Repeat password is required!</div>
+        <div *ngIf="userForm.controls.repeatPassword.hasError('minLength') || userForm.controls.repeatPassword.hasError('pattern')">
+          Min length 8. at least one number and one letter!
+        </div>
+      </div>
+      <div class="form-data_error-message"
+           *ngIf="userForm.controls.password.valid && userForm.controls.password.value !== userForm.controls.repeatPassword.value">
+        Passwords don't match!
+      </div>
+    </div>
+    <div class="user-form_button-create" *ngIf="mode === 'create'; else buttons_view">
+      <button type="submit"
+              class="content_button content_button_blue content_button_blue-shadow"
+              [disabled]="userForm.invalid || userForm.controls.password.value !== userForm.controls.repeatPassword.value"
+      >Create</button>
+    </div>
+    <ng-template #buttons_view>
+      <div class="user-form_buttons-view">
+        <button type="button" (click)="deleteUser()"
+                class="content_button content_button_red content_button_red-shadow">Delete</button>
+        <button type="submit"
+                class="content_button content_button_blue content_button_blue-shadow"
+                [disabled]="userForm.invalid || userForm.controls.password.value !== userForm.controls.repeatPassword.value"
+        >Save</button>
+      </div>
+    </ng-template>
+  </form>
+</div>

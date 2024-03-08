@@ -1,0 +1,93 @@
+.user-view {
+  background-color: var(--color-white);
+  border-radius: 6px;
+  padding: 30px 25px;
+  box-shadow: 0 0 30px #523F690D;
+  border: 1px solid #EBEDF3;
+}
+
+.user-view-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.user-view-close {
+  cursor: pointer;
+}
+
+.form-data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+.form-data label {
+  margin-bottom: 3px;
+}
+
+.form-data input, .form-data select {
+  height: 46px;
+  background-color: var(--background-color-form-input);
+  border: 0;
+  padding: 0 16px;
+  border-radius: 6px;
+}
+
+.form-data input:focus, .form-data select:focus {
+  outline: 1px solid var(--table-header-color);
+}
+
+.form-data select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.select-icon {
+  position: absolute;
+  right: 16px;
+  top: 28px;
+}
+
+.form-data_relative {
+  position: relative;
+}
+
+.form-data_relative input {
+  padding-left: 45px;
+}
+
+.form-data_error-input {
+  outline: 1px solid red;
+}
+
+.form-data_error-input:focus {
+  outline: 1px solid red !important;
+}
+
+.form-data_error-message {
+  margin-top: 3px;
+  color: red;
+}
+
+.email-icon {
+  position: absolute;
+  top: 28px;
+  left: 16px;
+}
+
+.user-form_button-create {
+  text-align: center;
+}
+
+.user-form_buttons-view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
