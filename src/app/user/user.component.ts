@@ -58,7 +58,7 @@ export class UserComponent implements OnInit {
       next: response => {
         this.userList = response;
       },
-      error: error => {
+      error: () => {
         this.errorMessage = 'Something wrong!';
       }
     });
@@ -89,7 +89,7 @@ export class UserComponent implements OnInit {
           ];
           this.successMessage = 'User was created successfully!';
         },
-        error: error => {
+        error: () => {
           this.errorMessage = 'Something wrong!';
         }
       });
@@ -109,7 +109,7 @@ export class UserComponent implements OnInit {
         });
         this.successMessage = 'User was updated successfully!';
       },
-      error: error => {
+      error: () => {
         this.errorMessage = 'Something wrong!';
       }
     });
@@ -119,10 +119,10 @@ export class UserComponent implements OnInit {
     this.userService.deleteUser(userId).subscribe({
       next: response => {
         this.closeUserFrom();
-        this.userList = this.userList.filter(user => user.id !== userId);
+        this.userList = this.userList.filter(user => user.id !== response.id);
         this.successMessage = 'User was deleted successfully!';
       },
-      error: error => {
+      error: () => {
         this.errorMessage = 'Something wrong!';
       }
     });
