@@ -19,4 +19,8 @@ export class UserListComponent {
   selectUserView(user: UserModel) {
     this.selectUserViewEmitter.emit(user);
   }
+
+  trackByUserId(index: number, user: UserModel): string {
+    return user.id;
+  }
 }
