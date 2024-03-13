@@ -73,7 +73,7 @@ export class UserComponent implements OnInit {
   }
 
   createUser(user: UserModel) {
-    const findUser = this.userList.find(item => item.userName === user.userName);
+    const findUser = this.userList.find(item => item.userName.trim() === user.userName.trim());
     if (findUser) {
       this.errorMessage = 'Username already exist!';
     } else {
@@ -97,22 +97,27 @@ export class UserComponent implements OnInit {
   }
 
   updateUser(user: UserModel) {
-    this.userService.updateUser(user).subscribe({
-      next: response => {
-        this.selectedUser = response;
-        this.userList = this.userList.map(user => {
-          if (user.id !== response.id) {
-            return user;
-          } else {
-            return response;
-          }
-        });
-        this.successMessage = 'User was updated successfully!';
-      },
-      error: () => {
-        this.errorMessage = 'Something wrong!';
-      }
-    });
+    const findUser = this.userList.find(item => item.userName.trim() === user.userName.trim());
+    if (findUser) {
+      this.errorMessage = 'Username already exist!';
+    } else {
+      this.userService.updateUser(user).subscribe({
+        next: response => {
+          this.selectedUser = response;
+          this.userList = this.userList.map(user => {
+            if (user.id !== response.id) {
+              return user;
+            } else {
+              return response;
+            }
+          });
+          this.successMessage = 'User was updated successfully!';
+        },
+        error: () => {
+          this.errorMessage = 'Something wrong!';
+        }
+      });
+    }
   }
 
   deleteUser(userId: string) {
