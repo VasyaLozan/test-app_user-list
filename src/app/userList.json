@@ -1,22 +1,3 @@
 {
-  "userList": [
-    {
-      "id": "1",
-      "userName": "qw",
-      "firstName": "nhhh",
-      "lastName": "kjjj",
-      "email": "jjjj@jjj",
-      "type": "Administrator",
-      "password": "1234567a"
-    },
-    {
-      "id": "2",
-      "userName": "qwq",
-      "firstName": "qqqq",
-      "lastName": "qqqqq",
-      "email": "qwww@qww",
-      "type": "Administrator",
-      "password": "1234567a"
-    }
-  ]
+  "userList": []
 }

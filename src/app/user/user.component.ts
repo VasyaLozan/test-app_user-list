@@ -4,6 +4,7 @@ import {UserViewComponent} from "./user-view/user-view.component";
 import {UserModel} from "./user.models";
 import {NgIf} from "@angular/common";
 import {UserService} from "./services/user.service";
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-user',
@@ -79,7 +80,7 @@ export class UserComponent implements OnInit {
     } else {
       this.userService.createUser({
         ...user,
-        id: (this.userList.length + 1).toString()
+        id: uuid.v4()
       }).subscribe({
         next: response => {
           this.viewUserFrom(response);
